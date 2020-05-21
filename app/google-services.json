@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "477759192240",
+    "firebase_url": "https://smilealarm-246c2.firebaseio.com",
+    "project_id": "smilealarm-246c2",
+    "storage_bucket": "smilealarm-246c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477759192240:android:e364b6f2dfac18d27c0f75",
+        "android_client_info": {
+          "package_name": "nwd.smile_alarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477759192240-s7pnnp29elok4rlu3cbggs56hps6abu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9RveaGyaiBHWjoZGuj0m_W_U35jzevac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477759192240-s7pnnp29elok4rlu3cbggs56hps6abu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
