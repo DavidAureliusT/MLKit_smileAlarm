@@ -49,11 +49,13 @@ public class takePhoto extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
         alertDialog = new SpotsDialog.Builder()
                 .setContext(this)
                 .setMessage("Please Wait, Processing...")
                 .setCancelable(false)
                 .build();
+
         mimageView = findViewById(R.id.imageView);
         buttonTakePicture = findViewById(R.id.button_capture);
         buttonTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -67,12 +69,12 @@ public class takePhoto extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 processFaceDetection(imageBitmap);
-                alertDialog.show();
             }
         });
         r = RingtoneManager.getRingtone(getApplicationContext(),
                 RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         r.play();
+        r.setLooping(true);
     }
 
     public void takePicture(){
@@ -98,14 +100,19 @@ public class takePhoto extends AppCompatActivity {
     }
 
     private void processFaceDetection(Bitmap bitmap) {
+        alertDialog.show();
+        //init firebaseVisionImage
         FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
-
+        //init firebaseFaceDetectorOption
         FirebaseVisionFaceDetectorOptions firebaseVisionFaceDetectorOptions =
-                new FirebaseVisionFaceDetectorOptions.Builder().build();
+                new FirebaseVisionFaceDetectorOptions.Builder()
+                        .setClassificationMode(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
+                        .build();
+        //init firebaeVisionFaceDetector
         FirebaseVisionFaceDetector firebaseVisionFaceDetector =
                 FirebaseVision.getInstance()
                         .getVisionFaceDetector(firebaseVisionFaceDetectorOptions);
-
+        //let detector detect face in firebaseVisionImage and do some command
         firebaseVisionFaceDetector.detectInImage(firebaseVisionImage)
                 .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionFace>>() {
                     @Override
@@ -113,25 +120,29 @@ public class takePhoto extends AppCompatActivity {
                         //scanning process
                         getFaceResults(firebaseVisionFaces);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(takePhoto.this, "Error: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(takePhoto.this, "Error: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                    }
+                });
     }
 
     private void getFaceResults(List<FirebaseVisionFace> firebaseVisionFaces) {
-        int counter = 0;
         for(FirebaseVisionFace face : firebaseVisionFaces){
-            Rect rect = face.getBoundingBox();
-            Intent intent = new Intent(this, WakeUp.class);
-            startActivity(intent);
-            counter++;
+            if (face.getSmilingProbability()!=FirebaseVisionFace.UNCOMPUTED_PROBABILITY) {
+                if (face.getSmilingProbability()>=0.8){
+                    Intent intent = new Intent(this, WakeUp.class);
+                    startActivity(intent);
+                    r.stop();
+                }
+                else{
+                    Toast.makeText(takePhoto.this, "I need your smile, please.."+face.getSmilingProbability(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            alertDialog.dismiss();
         }
-        alertDialog.dismiss();
-        r.stop();
-        this.onStop();
     }
 }
