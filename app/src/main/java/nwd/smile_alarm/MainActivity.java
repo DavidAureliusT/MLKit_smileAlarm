@@ -16,16 +16,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
-    private TextView mTextView;
+    private TextView mTextClock;
     private static final String TAG = "ChooserActivity";
     private static final int PERMISSION_REQUESTS = 1;
     @Override
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = findViewById(R.id.textView);
+        mTextClock = findViewById(R.id.textView);
 
         Button buttonTimePicker = findViewById(R.id.button_timepicker);
         buttonTimePicker.setOnClickListener(new View.OnClickListener(){
@@ -129,10 +131,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     private void updateTimeText(Calendar c){
-        String timeText = "Alarm set for: ";
-        timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-
-        mTextView.setText(timeText);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("kk:mm");
+        mTextClock.setText(simpleDateFormat.format(c.getTime()));
     }
 
     private void cancelAlarm(){
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 this, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         alarmManager.cancel(pendingIntent);
-        mTextView.setText("Alarm canceled");
+        mTextClock.setText("00:00");
     }
 
     private void setAlarm(Calendar c){

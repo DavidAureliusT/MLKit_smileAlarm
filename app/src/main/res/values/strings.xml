@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">smile_alarm</string>
+    <string name="capture_button">TAKE PHOTO</string>
+    <string name="scanning_button">SCAN IMAGE</string>
+    <string name="greeting_text">HAVE A NICE DAY!</string>
+    <string name="edit_alarm_button">EDIT ALARM</string>
+    <string name="cancel_alarm_button">CANCEL ALARM</string>
 </resources>

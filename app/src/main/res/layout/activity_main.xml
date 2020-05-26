@@ -2,38 +2,68 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <View
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:width="50dp"
+        android:background="@drawable/yellow_circle_object"
+        android:layout_marginTop="110dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:layout_centerHorizontal="true"
+        android:text="ALARM"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-medium" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/button_timepicker"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
         android:layout_marginBottom="30dp"
-        android:text="No Alarm set"
-        android:textSize="30sp" />
+        android:text="00:00"
+        android:textSize="130sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/black"/>
 
     <Button
         android:id="@+id/button_timepicker"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="open time picker" />
+        android:layout_marginTop="500dp"
+        android:text="@string/edit_alarm_button"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"
+        android:background="@drawable/rounded_button"
+        android:paddingVertical="5dp"/>
 
     <Button
         android:id="@+id/button_cancel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_timepicker"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
-        android:text="cancel alarm" />
-
+        android:layout_marginHorizontal="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/cancel_alarm_button"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"
+        android:background="@drawable/rounded_button"
+        android:paddingVertical="5dp"/>
 
     <Button
         android:id="@+id/button_normal_camera"
@@ -43,6 +73,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:text="try camera"/>
-
 
 </RelativeLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,28 +8,33 @@
 
     <Button
         android:id="@+id/button_capture"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="capture image"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/capture_button"
+        android:textColor="@color/black"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_button"
         android:layout_marginTop="55dp"/>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/ic_launcher_background"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="55dp"/>
+        android:layout_marginTop="55dp"
+        android:src="@drawable/yellow_circle_object" />
 
     <Button
         android:id="@+id/button_process"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Scanning image"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="55dp"/>
-
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/black"
+        android:text="@string/scanning_button" />
 
 
 </LinearLayout>
